@@ -1,7 +1,9 @@
 export default function Home() {
   return (
     <div className="flex items-center justify-center h-screen w-screen">
-      Modern Testing
+      <p>Modern Testing</p>
+
+      <button>Button</button>
     </div>
   );
 }

@@ -8,3 +8,11 @@ it("should render app component without crashing", () => {
 
   expect(element).toBeInTheDocument();
 });
+
+it("should render button component without crashing", () => {
+  render(<Home />);
+
+  const element = screen.getByText("Button");
+
+  expect(element).toBeInTheDocument();
+});
