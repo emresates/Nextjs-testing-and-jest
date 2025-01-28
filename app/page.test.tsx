@@ -3,10 +3,13 @@ import {
   waitForElementToBeRemoved,
   render,
   screen,
+  renderHook,
+  act,
 } from "@testing-library/react";
 import Home from "./page";
 import userEvent from "@testing-library/user-event";
 import { customRender } from "./test-utils";
+import React from "react";
 
 // it("should render app component without crashing", () => {
 //   render(<Home />);
@@ -198,8 +201,30 @@ it("should render waitFor without crashing", async () => {
 // });
 
 //* Custom Renderer Setup
-it("should render render ", async () => {
-  customRender(<Home />);
+// it("should render render ", async () => {
+//   customRender(<Home />);
 
-  screen.debug();
+//   screen.debug();
+// });
+
+function useCustomHook() {
+  const [name, setName] = React.useState("Ahmet");
+  const changeName = (newName: string) => {
+    setName(newName);
+  };
+
+  return { name, changeName };
+}
+
+//* Hook Testing RenderHook ve Act
+it("should render render ", async () => {
+  const { result } = renderHook(useCustomHook);
+
+  expect(result.current.name).toBe("Ahmet");
+
+  act(() => {
+    result.current.changeName("Mehmet");
+  });
+
+  expect(result.current.name).toBe("Mehmet");
 });
