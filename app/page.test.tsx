@@ -207,24 +207,111 @@ it("should render waitFor without crashing", async () => {
 //   screen.debug();
 // });
 
-function useCustomHook() {
-  const [name, setName] = React.useState("Ahmet");
-  const changeName = (newName: string) => {
-    setName(newName);
-  };
-
-  return { name, changeName };
-}
-
 //* Hook Testing RenderHook ve Act
-it("should render render ", async () => {
-  const { result } = renderHook(useCustomHook);
+// function useCustomHook() {
+//   const [name, setName] = React.useState("Ahmet");
+//   const changeName = (newName: string) => {
+//     setName(newName);
+//   };
 
-  expect(result.current.name).toBe("Ahmet");
+//   return { name, changeName };
+// }
 
-  act(() => {
-    result.current.changeName("Mehmet");
-  });
+// it("should render render ", async () => {
+//   const { result } = renderHook(useCustomHook);
 
-  expect(result.current.name).toBe("Mehmet");
+//   expect(result.current.name).toBe("Ahmet");
+
+//   act(() => {
+//     result.current.changeName("Mehmet");
+//   });
+
+//   expect(result.current.name).toBe("Mehmet");
+// });
+
+//* BeforeEach and AfterEach
+// class DatabaseClient {
+//   users: { id: number; name: string }[];
+//   constructor() {
+//     this.users = [];
+//   }
+
+//   initialize() {
+//     this.users = [
+//       {
+//         id: 1,
+//         name: "Ahmet",
+//       },
+//       {
+//         id: 2,
+//         name: "Mehmet",
+//       },
+//     ];
+//   }
+
+//   getUsers() {
+//     return this.users;
+//   }
+
+//   getUser(id: number) {
+//     return this.users.find((user) => user.id === id);
+//   }
+
+//   deleteUser(id: number) {
+//     this.users = this.users.filter((user) => user.id !== id);
+//   }
+
+//   reset() {
+//     this.users = [];
+//   }
+// }
+
+describe("Database Client", () => {
+  //* Without beforeEach
+  // it("should initialize with two users ", async () => {
+  //   const dbClient = new DatabaseClient();
+  //   dbClient.initialize();
+  //   const users = dbClient.getUsers();
+  //   expect(users.length).toBe(2);
+  //   expect(users).toMatchObject([
+  //     { id: 1, name: "Ahmet" },
+  //     { id: 2, name: "Mehmet" },
+  //   ]);
+  // });
+  // it("should delete a user ", async () => {
+  //   const dbClient = new DatabaseClient();
+  //   dbClient.initialize();
+  //   dbClient.deleteUser(1);
+  //   const user = dbClient.getUser(1);
+  //   expect(user).toBeFalsy();
+  // });
+  // it("should get a user ", async () => {
+  //   const dbClient = new DatabaseClient();
+  //   dbClient.initialize();
+  //   const user = dbClient.getUser(1);
+  //   expect(user).toMatchObject({ id: 1, name: "Ahmet" });
+  // });
+  //* With beforeEach
+  // let dbClient: DatabaseClient;
+  // beforeEach(() => {
+  //   dbClient = new DatabaseClient();
+  //   dbClient.initialize();
+  // });
+  // it("should initialize with two users ", async () => {
+  //   const users = dbClient.getUsers();
+  //   expect(users.length).toBe(2);
+  //   expect(users).toMatchObject([
+  //     { id: 1, name: "Ahmet" },
+  //     { id: 2, name: "Mehmet" },
+  //   ]);
+  // });
+  // it("should delete a user ", async () => {
+  //   dbClient.deleteUser(1);
+  //   const user = dbClient.getUser(1);
+  //   expect(user).toBeFalsy();
+  // });
+  // it("should get a user ", async () => {
+  //   const user = dbClient.getUser(1);
+  //   expect(user).toMatchObject({ id: 1, name: "Ahmet" });
+  // });
 });
