@@ -1,7 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useFetch } from "./useFetch";
+import Listing from "./listing";
 
-export default function Home({ suffix }: { suffix?: string }) {
+export default function Home({
+  suffix,
+  ListingComponent = Listing,
+}: {
+  suffix?: string;
+  ListingComponent?: React.ComponentType;
+}) {
   // const [state, setState] = useState<string | null>("Ahmet");
 
   // useEffect(() => {
@@ -10,19 +18,27 @@ export default function Home({ suffix }: { suffix?: string }) {
   //   }, 300);
   // }, []);
 
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
-  const handleIncrement = () => {
-    setCount(count + 1);
-  };
+  // const handleIncrement = () => {
+  //   setCount(count + 1);
+  // };
 
-  const handleCopy = () => {
-    window.navigator.clipboard.writeText("Heey");
-  };
+  // const handleCopy = () => {
+  //   window.navigator.clipboard.writeText("Heey");
+  // };
 
-  const handleOnClick = () => {
-    console.log("Clicked");
-  };
+  // const handleOnClick = () => {
+  //   console.log("Clicked");
+  // };
+
+  // const { data, loading } = useFetch(
+  //   "https://jsonplaceholder.typicode.com/posts"
+  // );
+
+  // if (loading) {
+  //   return <p>Loading...</p>;
+  // }
 
   return (
     <div className="flex items-center justify-center h-screen w-screen">
@@ -58,12 +74,19 @@ export default function Home({ suffix }: { suffix?: string }) {
       {/* //* Type */}
       {/* <input type="text" /> */}
 
+      {/* <button onClick={handleOnClick}>Click me</button> */}
 
-      <button onClick={handleOnClick}>
-        Click me
-      </button>
+      {/* //* Fetch */}
+      {/* <ul>
+        {data.map((post: any) => (
+          <li key={post.id}>{post.title}</li>
+        ))}
+      </ul> */}
 
-
+      {/* //* For dependeny injection */}
+      <h1>Title</h1>
+      <ListingComponent />
+      <p>Lorem ipsum</p>
     </div>
   );
 }

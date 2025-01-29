@@ -12,6 +12,9 @@ import { customRender } from "./test-utils";
 import React from "react";
 import useFetch from "./useFetch";
 import { ButtonTest } from "./ButtonTest";
+import { mockPosts } from "./mock_posts";
+import postService from "./post-service";
+import axios from "axios";
 
 // it("should render app component without crashing", () => {
 //   render(<Home />);
@@ -411,14 +414,89 @@ describe("Database Client", () => {
 //   // await expect(mock("some arg")).resolves.toBe("return something");
 // });
 
-it("mock promise rejection", async () => {
-  // const error = new Error("Error message");
-  const mock = jest.fn();
-  // mock.mockRejectedValue(error);
+// it("mock promise rejection", async () => {
+//   // const error = new Error("Error message");
+//   const mock = jest.fn();
+//   // mock.mockRejectedValue(error);
 
-  mock.mockRejectedValue("return something");
-  await expect(mock("some arg")).rejects.toBe("return something");
+//   mock.mockRejectedValue("return something");
+//   await expect(mock("some arg")).rejects.toBe("return something");
 
-  // await expect(mock("some arg")).rejects.toThrow();
-  // await expect(mock("some arg")).rejects.toThrow(error);
-});
+//   // await expect(mock("some arg")).rejects.toThrow();
+//   // await expect(mock("some arg")).rejects.toThrow(error);
+// });
+
+//* Module Mock
+// jest.mock("./useFetch", () => {
+//   return {
+//     useFetch: () => {
+//       return {
+//         loading: false,
+//         data: mockPosts,
+//       };
+//     },
+//   };
+// });
+
+// it("mock module", async () => {
+//   render(<Home />);
+
+//   screen.debug();
+
+//   const listItems = screen.getAllByRole("listitem");
+
+//   expect(listItems).toHaveLength(mockPosts.length);
+// });
+
+//* NPM package Mock
+// jest.mock("axios");
+
+// it("should render bla", async () => {
+//   const mockResponse = {
+//     data: mockPosts,
+//   };
+
+//   (axios.get as jest.Mock).mockResolvedValue(mockResponse);
+
+//   const result = await postService.getPosts();
+
+//   expect(result).toHaveLength(mockPosts.length);
+//   expect(result).toMatchObject(mockPosts);
+// });
+
+//* Spyon ile fetch mock
+//! `fetch` does not exist in the provided object
+// it("should render bla", async () => {
+//   const fetch = jest.spyOn(window, "fetch");
+//   console.log("fetch", fetch);
+
+//   fetch.mockResolvedValue({
+//     json: () => {
+//       return Promise.resolve({
+//         data: mockPosts,
+//       });
+//     },
+//   } as Response);
+
+//   const result = await postService.getPosts();
+
+//   expect(result).toHaveLength(mockPosts.length);
+//   expect(result).toMatchObject(mockPosts);
+// });
+
+//* Dependency Injection
+
+//* Without package
+//* react-magnetic-di kullanılabilir fakat paket warning verdi
+// it("should render dependency injection", async () => {
+//   const ListingComponent = () => <div> empty </div>;
+//   render(<Home ListingComponent={ListingComponent} />);
+//   screen.debug();
+//   expect(screen.getByText("empty")).toBeInTheDocument();
+// });
+
+it("should render empty", () => {
+
+})
+
+
